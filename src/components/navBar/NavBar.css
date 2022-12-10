@@ -26,6 +26,7 @@ body {
 }
 .navbar__header ul li a{
     text-decoration: none;
+    color: black;
 }
 .navbar__header ul li::after{
   content: '';

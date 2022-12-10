@@ -1,11 +1,16 @@
 import NavBar from "./components/navBar/NavBar"
 import ItemListContainer from "./components/itemListContainer/ItemListContainer"
+import Counter from "./components/counter/Counter";
+
 
 function App() {
   return (
     <div>
      <NavBar/>
-     <ItemListContainer greeting={"Tienda de moviles"}/>
+
+     <Counter/>
+
+     <ItemListContainer greeting={"Tienda de moviles"}/> 
     </div>
   );
 }
