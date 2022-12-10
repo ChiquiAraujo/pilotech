@@ -24,7 +24,7 @@ body {
     display: inline-block;
     position: relative;
 }
-.navbar__header ul li a{
+.ul__li--link{
     text-decoration: none;
     color: black;
 }

@@ -11,7 +11,7 @@ const Counter = ({stock, initial, onAdd}) => {
 
         <h2>{counter}</h2>
 
-        <CustomButton texto={"sumar"} counter={counter} setCounter={setCounter} />
+        <CustomButton /*texto={"sumar"}*/ counter={counter} setCounter={setCounter} />
     </div>
   )
 }
