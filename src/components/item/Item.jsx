@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 
 
-
 const Item = ({elements}) => {
   return (
     <div key={elements.id} className="cards__products">                  
@@ -10,7 +9,7 @@ const Item = ({elements}) => {
           <b>{elements.price}€</b>
           <p>IVA incluido</p>          
           <button> <Link className="button__detalles" to={`/ItemDetail/${elements.id}`} > Ver Detalles </Link> </button>                   
-        </div>
+    </div>
   );
 };
 

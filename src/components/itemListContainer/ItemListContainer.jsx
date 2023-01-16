@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { products } from '../../products'
+import CustomLoader from '../customLoader/CustomLoader'
 import "../item/Item.css"
 import ItemList from '../itemList/ItemList'
 
@@ -36,12 +37,12 @@ const ItemListContainer = ( ) => {
 
   }, [id])
       
-  return (
-
+  return (    
     <div>   
-      <ItemList items={items}/>     
-    </div>
-    
+
+      { items.length > 0 ? <ItemList items={items}/> : <CustomLoader/> }       
+        
+    </div>    
   )
 }
 
