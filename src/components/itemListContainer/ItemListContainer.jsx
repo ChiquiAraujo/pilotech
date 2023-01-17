@@ -10,13 +10,13 @@ import ItemList from '../itemList/ItemList'
 
 const ItemListContainer = ( ) => {
 
-
   const {id} = useParams()
   console.log(id)
 
   const [items, setItems] = useState([])
+  //const []= useState(false)
  
-    console.log(items)
+  //console.log(items)
   
   useEffect (()=> {
 
@@ -38,13 +38,10 @@ const ItemListContainer = ( ) => {
   }, [id])
       
   return (    
-    <div>   
-
-      { items.length > 0 ? <ItemList items={items}/> : <CustomLoader/> }       
-        
+    <div>  
+      { items.length > 0 ? <ItemList items={items}/> : <CustomLoader/> }               
     </div>    
   )
 }
-
 
 export default ItemListContainer

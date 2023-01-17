@@ -1,9 +1,8 @@
-import React from 'react'
 import {products} from '../../products'
 import { useParams } from 'react-router-dom'
 import { useState } from 'react'
 import { useEffect } from 'react'
-import Counter from "../counter/Counter";
+import ItemDetail from '../itemDetail/ItemDetail'
 
 const ItemDetailContainer = () => {
 
@@ -21,16 +20,9 @@ const ItemDetailContainer = () => {
     console.log(product)
 
   return (
-    <div className="cards__products">                  
-        <img className="cards__img" src={product.img} alt="" />
-        <h3>{product.name}</h3>
-        <p>{product.brand} {product.description}</p>       
-        <p>En almacen: {product.stock}</p>
-        <p>Categoría: {product.category} </p>
-        <b>{product.price}€</b>                 
-        <div><Counter/> </div>
-        <button>Añadir al carrito</button>          
-    </div>
+                     
+      <ItemDetail product={product}/>
+    
   )
 }
 
