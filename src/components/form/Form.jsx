@@ -1,19 +1,39 @@
+import { addDoc, collection, serverTimestamp, doc, updateDoc  } from 'firebase/firestore'
 import { useState} from 'react'
+import { db } from '../../firebaseConfig'
 
-const Form = () => {
+const Form = ({cart, getTotalPrice, setOrderId, clearCart}) => {
 
-    // const[name, setName]= useState("")
-    // const[lastName,setLastName]= useState("")
-    const[userData, setUserData]= useState({name:"", lastName:""})
+   
+    const[userData, setUserData]= useState({name:"", phone:"", email:""})
+
+    const total = getTotalPrice()
   
     const handleSubmit = (event)=>{
         event.preventDefault()        
-        console.log(userData)        
+                
+        const order = {
+            buyer: userData,
+            items: cart,
+            total: total,
+            date: serverTimestamp()
+        }
+        
+        const orederCollection = collection(db, "orders")
+
+        addDoc(orederCollection, order)
+        .then(res => setOrderId(res.id) )
+      
+        cart.map( product => {
+            updateDoc( doc(db, "products", product.id ), {stock: product.stock - product.quantity }) 
+        })
+
+
+
+        clearCart()
+
     }
 
-    // const handleChangeName = (event)=>{
-    //     setUserData({...userData, name: event.target.value})    
-    // }
   
     return (
     <form action="" onSubmit={handleSubmit}>
@@ -24,12 +44,18 @@ const Form = () => {
         value ={userData.name}
         />
         <input type="text" 
-        placeholder='Ingrese su apellido' 
-        name='lastName' 
-        onChange={(event)=> setUserData({...userData, lastName: event.target.value})} 
-        value={userData.lastName}
+        placeholder='Ingrese su número telefono' 
+        name='phone' 
+        onChange={(event)=> setUserData({...userData, phone: event.target.value})} 
+        value={userData.phone}
          />
-        <button type='submit'>Enviar</button>
+         <input type="email" 
+        placeholder='Ingrese su email' 
+        name='email' 
+        onChange={(event)=> setUserData({...userData, email: event.target.value})} 
+        value={userData.email}
+         />
+        <button type='submit'>Comprar</button>
     </form>
   )
 }

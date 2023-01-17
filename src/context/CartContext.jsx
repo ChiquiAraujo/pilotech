@@ -38,14 +38,11 @@ const CartContextProvider = ({ children }) => {
     setCart([])
   }
 
-  //*
   const getQuantityBiId =(id)=>{
     const product = cart.find(elemento => elemento.id === id)
     return product?.quantity
   }
 
-
-  //sumatoria del carrito
   const getTotalPrice = ()=>{
 
     const total = cart.reduce((acc, element)=>{
@@ -54,12 +51,21 @@ const CartContextProvider = ({ children }) => {
     return total
   }
 
+  const deleteProductById = (id)=>{
+
+    const newArray = cart.filter( product => product.id !== id )
+
+    setCart( newArray )
+
+  }
+
   const data = {
     cart,
     addToCart,
     clearCart,
     getQuantityBiId,
-    getTotalPrice
+    getTotalPrice,
+    deleteProductById
   }
 
   return (

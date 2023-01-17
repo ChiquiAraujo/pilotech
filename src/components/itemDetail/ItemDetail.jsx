@@ -15,10 +15,7 @@ const ItemDetail = ({product}) => {
   }  
 
  const quantity = getQuantityBiId(product.id) 
- console.log(quantity)
-
-
- 
+  
   return (
     <div className="cards__products">
         <img className="cards__img" src={product.img} alt="" />

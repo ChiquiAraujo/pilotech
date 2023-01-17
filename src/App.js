@@ -5,6 +5,7 @@ import Form from "./components/form/Form";
 import {BrowserRouter, Routes, Route} from "react-router-dom"
 import Cart from "./components/cart/Cart";
 import CartContextProvider from "./context/CartContext";
+import FormikFormulario from "./components/formik/FormikFormulario";
 
 
 
@@ -17,7 +18,7 @@ function App() {
 
          <Routes>
 
-           <Route path="/" element={<h1>Aquí se renderizará la home</h1>} />   
+           <Route path="/" element={<ItemListContainer greeting={"Tienda de moviles"}/>} /> 
 
            <Route path="/tienda" element={<ItemListContainer greeting={"Tienda de moviles"}/>} />
 
@@ -27,7 +28,9 @@ function App() {
 
             <Route path="/checkout" element={<Form/>}/>
 
-           <Route path="/cart" element={<Cart/>}/>   
+            <Route path="/formik" element={<FormikFormulario/>}/>
+
+            <Route path="/cart" element={<Cart/>}/>   
              
             <Route path="*" element={<h2>Ups... Page not found <br/> Error 404 </h2>}/>
 

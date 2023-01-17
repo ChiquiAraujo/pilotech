@@ -2,38 +2,63 @@ import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { products } from '../../products'
 import CustomLoader from '../customLoader/CustomLoader'
 import "../item/Item.css"
 import ItemList from '../itemList/ItemList'
 
+import { getDocs, collection, query, where} from "firebase/firestore"
+import { db } from "../../firebaseConfig"
+
 
 const ItemListContainer = ( ) => {
-
   const {id} = useParams()
-  console.log(id)
 
   const [items, setItems] = useState([])
-  //const []= useState(false)
- 
-  //console.log(items)
-  
+  const [customLoader, setCustomLoader] =useState([])
+   
   useEffect (()=> {
 
-    const categoriaFilterd = products.filter (categoria => categoria.category === id)
-       
-    const task = new Promise ( (resolve, reject) => {
-      setTimeout(() => {
-        resolve (id ? categoriaFilterd : products)        
-      }, 2000);     
-      
-    })
-  
-    task
+    const itemCollection = collection( db, "products" )
+
+    if(id){
+      const q = query(itemCollection, where("category", "==" ,id))
+      getDocs(q)
       .then( (res)=> {
-        setItems (res)} )
-      .catch( (err)=> {
-        console.log("No se cargan los productos")} )
+        const products = res.docs.map( product => {
+          return{
+            
+            ...product.data(),
+            id: product.id
+          }
+        })
+                
+        setItems(products)
+      })
+      .catch( (err)=> console.log(err))
+
+
+    }else{
+      getDocs(itemCollection)
+      .then( (res)=> {
+        const products = res.docs.map( product => {
+          return{
+            
+            ...product.data(),
+            id: product.id
+          }
+        })        
+        setItems(products)
+      })
+      .catch( (err)=> console.log(err))
+
+    }
+
+   
+
+    setTimeout ( ()=>{
+      setCustomLoader(false)
+    },1000)
+
 
   }, [id])
       
